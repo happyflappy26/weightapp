@@ -1,1 +1,31 @@
-{"name":"Aufbau – Ernährung & Training","short_name":"Aufbau","description":"Privates Gewicht-, Ernährungs- und Trainingstagebuch","lang":"de","start_url":"./","scope":"./","display":"standalone","background_color":"#F7F8FA","theme_color":"#4263A8","icons":[{"src":"icon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"},{"src":"icon-192.png","sizes":"192x192","type":"image/png","purpose":"any maskable"},{"src":"icon-512.png","sizes":"512x512","type":"image/png","purpose":"any maskable"}]}
+{
+  "name": "Weight App – Ernährung & Training",
+  "short_name": "Weight App",
+  "description": "Privates Gewicht-, Ernährungs- und Trainingstagebuch",
+  "lang": "de",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#F7F8FA",
+  "theme_color": "#4263A8",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}

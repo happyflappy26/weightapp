@@ -14,3 +14,18 @@
 
 /* v0.6.1 */
 .daily-value{display:flex;align-items:baseline;flex-wrap:wrap;column-gap:5px;row-gap:2px;font-variant-numeric:tabular-nums;white-space:normal}.daily-value strong{font-size:clamp(16px,4.5vw,21px);font-weight:680;letter-spacing:-.4px}.daily-value>span{font-size:clamp(10px,3vw,12px);color:var(--muted)}.daily-status{min-height:20px;display:flex;align-items:center}.goal-reached{display:inline-flex;align-items:center;gap:4px;color:var(--success);font-size:12px;font-weight:650}.goal-reached svg{flex-shrink:0}.chartaverage{stroke:var(--muted);stroke-width:1.4;stroke-dasharray:5 4;opacity:.8}.chart-average-label{font-size:12px;color:var(--muted);margin:2px 0 5px}.energy-chart{overflow:visible}
+
+/* v0.6.2: Zielreferenz & Abschluss im Ernährungstagebuch */
+.energy-legend{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-top:4px;margin-bottom:9px;color:var(--muted);font-size:11px}
+.energy-legend>span{display:inline-flex;gap:6px;align-items:center}
+.energy-legend i{display:inline-block;width:16px;height:9px;flex-shrink:0;border-radius:2px}
+.energy-legend-dash{height:0!important;border-top:2px dashed var(--blue);border-radius:0!important}
+.energy-legend-success{background:var(--success)}
+.energy-legend-today{background:var(--orange);opacity:.52}
+.diary-totals{border-top:1px solid var(--line);margin-top:12px;padding-top:15px}
+.diary-total-title{font-size:12px;font-weight:650;color:var(--muted);margin-bottom:10px}
+.diary-total-pair{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.diary-total-pair>div{display:flex;flex-direction:column;gap:4px}
+.diary-total-pair span{font-size:12px;color:var(--muted)}
+.diary-total-pair strong{font-size:22px;font-weight:680;font-variant-numeric:tabular-nums}
+.diary-total-pair small{font-weight:450;color:var(--muted);font-size:12px}

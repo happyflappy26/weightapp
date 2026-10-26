@@ -29,3 +29,6 @@
 .diary-total-pair span{font-size:12px;color:var(--muted)}
 .diary-total-pair strong{font-size:22px;font-weight:680;font-variant-numeric:tabular-nums}
 .diary-total-pair small{font-weight:450;color:var(--muted);font-size:12px}
+
+/* v0.7 progress overlays */
+.chart-smooth{fill:none;stroke:#3c978e;stroke-width:2.8;stroke-linecap:round;stroke-linejoin:round}.chart-prediction{fill:none;stroke:#3c978e;stroke-width:2.2;stroke-dasharray:6 5}.chart-future{fill:var(--blue);opacity:.055}.chart-future-edge{stroke:var(--muted);stroke-width:1;stroke-dasharray:3 4;opacity:.5}.chart-options{display:flex;flex-direction:column;gap:9px;margin:10px 0}.chart-options label{display:flex;align-items:center;gap:8px}.chart-options input{accent-color:var(--blue)}.legend i.smooth{background:#3c978e}.legend i.prediction{background:repeating-linear-gradient(90deg,#3c978e 0 6px,transparent 6px 10px)}.goal-forecast{background:var(--sub);border-radius:12px;padding:12px;margin:12px 0}.goal-forecast .footnote{margin:10px 0 0}

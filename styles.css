@@ -44,3 +44,20 @@
 .chip.sel{background:color-mix(in srgb,var(--blue) 14%,var(--surface));border-color:var(--blue);color:var(--blue);font-weight:700}
 .chip:active{transform:scale(.97)}
 @media(prefers-reduced-motion:reduce){.home-metric-card,.foodresult{transition:none}.home-metric-card:active,.chip:active{transform:none}}
+
+/* v0.7.2 — food and drink master data management */
+.food-result-wrap{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 38px;align-items:center;column-gap:4px;border-bottom:1px solid var(--line)}
+.food-result-wrap>.foodresult{min-width:0;border-bottom:0}
+.food-more{width:36px;height:38px;display:inline-flex;align-items:center;justify-content:center;color:var(--muted);background:transparent;border:0;border-radius:9px;font-size:24px;line-height:1}
+.food-more:active,.food-more:focus-visible{background:var(--sub);color:var(--blue);outline:2px solid var(--blue);outline-offset:-2px}
+.food-actions{grid-column:1/-1;display:flex;justify-content:flex-end;gap:8px;flex-wrap:wrap;padding:0 4px 9px}
+.managed-food{border-bottom:1px solid var(--line)}
+.managed-food>.foodresult{border-bottom:0;display:flex}
+.managed-food>.foodresult .grow{min-width:0}
+.managed-food .food-actions{padding:4px 8px 12px}
+.food-manage-tabs{margin:10px 0 14px}
+
+/* v0.7.3: clear goal-state colors separate from provisional-day opacity. */
+:root{--energy-neutral:#8390A5}
+.energy-legend-neutral{background:var(--energy-neutral)}
+.energy-legend-today{background:var(--energy-neutral);opacity:.46}

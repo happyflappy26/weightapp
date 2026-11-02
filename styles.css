@@ -76,3 +76,23 @@
 .rest-compact{background:var(--sub);border:1px solid var(--line);border-radius:12px;padding:8px 10px;margin:12px 0}.rest-main{display:flex;align-items:center;gap:8px}.rest-main strong{font-size:12px;flex:1}.rest-time{font-size:19px;font-weight:700;font-variant-numeric:tabular-nums;white-space:nowrap}.rest-primary{background:var(--blue);color:white;border:0;border-radius:9px;font-size:12px;font-weight:650;min-width:52px;min-height:34px}.rest-reset{background:transparent;border:1px solid var(--line);color:var(--text);border-radius:9px;width:34px;height:34px;font-size:23px;line-height:1}.rest-presets{display:flex;justify-content:center;gap:7px;margin-top:7px}.rest-presets button{flex:1;background:var(--surface);border:1px solid var(--line);color:var(--muted);border-radius:8px;padding:5px 0;font-size:11px}.rest-presets button.sel{border-color:var(--blue);color:var(--blue);font-weight:700}.exercise-mark-button{margin:0}
 .exercise-photo-overlay{position:fixed;inset:0;z-index:100;background:#080b10f5;display:flex;align-items:center;justify-content:center;flex-direction:column;padding:16px;cursor:zoom-out;outline:none}.exercise-photo-overlay img{display:block;width:100%;max-width:900px;height:auto;max-height:88dvh;object-fit:contain}.exercise-photo-overlay span{color:#f3f4f8;font-size:12px;position:absolute;bottom:calc(18px + env(safe-area-inset-bottom));opacity:.8;pointer-events:none}
 @media(max-width:390px){.exercise-photo-pair img{height:auto}.exercise-detail-inner{padding:12px 14px}.rest-compact{padding:7px}}
+
+
+/* v0.8.4 – kompaktere Legende und kcal-Hinweise im Fortschritt */
+:root{--protein-neutral:#b6a8cb}
+.energy-legend{display:flex;flex-direction:column;gap:7px;align-items:flex-start;margin-top:6px;margin-bottom:0;color:var(--muted);font-size:10.75px;letter-spacing:-.01em;line-height:1.35}
+.energy-legend-row{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center}
+.energy-legend-tight{column-gap:12px}
+.energy-legend>span,.energy-legend-row>span{display:inline-flex;gap:6px;align-items:center;white-space:nowrap}
+.energy-legend i{display:inline-block;width:16px;height:9px;flex-shrink:0;border-radius:2px}
+.energy-legend-dash{height:0!important;border-top:2px dashed var(--blue);border-radius:0!important}
+.energy-legend-dash-protein{border-top-color:var(--protein)}
+.energy-legend-zero{height:0!important;border-top:2px solid var(--muted);border-radius:0!important}
+.energy-legend-success{background:var(--success)}
+.energy-legend-neutral{background:var(--energy-neutral)}
+.energy-legend-protein-success{background:var(--protein)}
+.energy-legend-protein-neutral{background:var(--protein-neutral)}
+.energy-legend-today{background:var(--energy-neutral);opacity:.46}
+.energy-legend-today-protein{background:var(--protein-neutral);opacity:.46}
+.progress-energy-hint{font-size:11px;line-height:1.35;margin-top:6px}
+@media(max-width:370px){.energy-legend{font-size:10px}.energy-legend-row{gap:7px 11px}.progress-energy-hint{font-size:10px}}

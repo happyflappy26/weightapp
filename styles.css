@@ -96,3 +96,15 @@
 .energy-legend-today-protein{background:var(--protein-neutral);opacity:.46}
 .progress-energy-hint{font-size:11px;line-height:1.35;margin-top:6px}
 @media(max-width:370px){.energy-legend{font-size:10px}.energy-legend-row{gap:7px 11px}.progress-energy-hint{font-size:10px}}
+
+/* v0.9.0: Zusammengeführte Entwicklung und kompakte Trends */
+.energy-daily-average{font-size:11px;font-weight:650;margin-top:7px;color:var(--orange)}
+.analysis-metrics{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:14px;margin-top:7px}
+.analysis-metrics .statnum{font-size:20px;white-space:nowrap}
+.analysis-metrics .statnum small{font-size:11px;font-weight:450;color:var(--muted)}
+.analysis-finding{background:var(--sub);border-radius:12px;padding:12px;margin-top:16px;font-size:12px;line-height:1.55}
+.analysis-finding strong{font-size:12px}.analysis-finding p{margin:5px 0 0;color:var(--muted)}
+.combined-analysis h2{margin-bottom:9px}
+.progress-forecast-note{border-top:1px solid var(--line);margin-top:11px;padding-top:12px;font-size:12px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
+.progress-forecast-note strong{font-weight:650}
+@media(max-width:380px){.analysis-metrics{gap:8px}.analysis-metrics .statnum{font-size:17px}.combined-analysis .split{align-items:flex-start}.combined-analysis .split>span{font-size:10px;white-space:nowrap}}

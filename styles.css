@@ -108,3 +108,12 @@
 .progress-forecast-note{border-top:1px solid var(--line);margin-top:11px;padding-top:12px;font-size:12px;line-height:1.5;display:flex;flex-direction:column;gap:3px}
 .progress-forecast-note strong{font-weight:650}
 @media(max-width:380px){.analysis-metrics{gap:8px}.analysis-metrics .statnum{font-size:17px}.combined-analysis .split{align-items:flex-start}.combined-analysis .split>span{font-size:10px;white-space:nowrap}}
+
+/* v0.9.2: streamlined meal flow */
+.meal-compact{position:sticky;top:-14px;z-index:2;background:var(--surface);padding:8px 0 11px;margin-bottom:8px;border-bottom:1px solid var(--line)}
+.meal-compact-summary{display:flex;align-items:center;justify-content:space-between;gap:10px;background:var(--sub);border:1px solid var(--line);border-radius:13px;padding:11px}
+.meal-compact-summary>div{min-width:0}.meal-compact-summary strong{font-size:13px}.meal-compact-summary .small{margin-top:4px;line-height:1.4}.meal-compact-summary button{flex-shrink:0}
+.meal-review-top{background:var(--sub);border-radius:13px;padding:13px;margin-bottom:12px}.meal-review-top .statnum{font-size:22px}.meal-review-items{margin:0 0 12px}.meal-review-items .entry{gap:8px}.meal-review-items .entry strong{font-size:13px}.meal-review-items+.btn{margin-bottom:20px}
+#mealform .field{margin-bottom:14px}#mealform .text-action{background:transparent;color:var(--muted);border:0;font-size:12px;padding:8px;margin-top:6px}
+.meal-suggestions{margin:0 0 12px}.meal-suggestions .chiprow{margin-top:6px}.meal-suggestions .chip{font-size:12px;padding:7px 10px}
+.quantity-stepper{display:grid;grid-template-columns:44px minmax(0,1fr) 44px;gap:8px;align-items:center}.quantity-stepper button{height:44px;border:1px solid var(--line);border-radius:11px;background:var(--sub);color:var(--text);font-size:22px}.quantity-stepper input{text-align:center;min-width:0}

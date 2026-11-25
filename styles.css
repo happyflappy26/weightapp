@@ -123,3 +123,16 @@
 .new-entry-choices{display:grid;gap:10px;margin:14px 0 6px}.new-entry-choice{display:flex;flex-direction:column;gap:6px;text-align:left;background:var(--sub);border:1px solid var(--line);border-radius:13px;padding:14px;color:var(--text)}.new-entry-choice strong{font-size:14px}.new-entry-choice span{font-size:12px;color:var(--muted)}
 .recipe-edit-row{display:flex;align-items:center;gap:8px;border-bottom:1px solid var(--line);padding:9px 0}.recipe-edit-row>span:first-child{flex:1;min-width:0;font-size:12px}.recipe-edit-row input{width:65px;min-width:0;border:1px solid var(--line);padding:9px 5px;border-radius:9px;background:var(--surface);color:var(--text);text-align:right}.recipe-edit-row .btn{min-height:32px;padding:5px 9px}.recipe-edit-items{margin-bottom:16px}
 .rest-standalone{margin:0 0 14px;background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:9px 12px;box-shadow:var(--shadow)}.rest-standalone .rest-status{min-height:0;margin:3px 0 0;color:var(--success)}.rest-standalone .rest-status:empty{display:none}.rest-standalone .rest-main{gap:6px}.rest-standalone .rest-primary{font-size:11px;padding:0 7px}.rest-standalone .rest-time{font-size:19px}.rest-standalone .rest-presets{margin-top:5px}
+
+/* v0.11.0 – nutritional selector and first-launch onboarding */
+:root{--sugar:#b58d69}
+.bar.sugar span{background:var(--sugar)}
+.delete-action{display:flex;justify-content:flex-end;margin-top:10px}
+.delete-action .btn{width:auto!important;min-height:38px!important;padding:8px 12px!important}
+.delete-action .btn.danger{color:#df6969!important;border-color:#c35757!important;background:transparent!important}
+.onboarding-page{min-height:100dvh;background:var(--bg);display:flex;align-items:center;justify-content:center;padding:24px 16px 55px}
+.onboarding-panel{width:100%;max-width:510px;border-radius:20px;border:1px solid var(--line);background:var(--surface);padding:26px 22px;box-shadow:var(--shadow)}
+.onboarding-panel h1{font-size:27px;margin:6px 0 10px}.onboarding-panel h2{font-size:18px;margin:21px 0 14px}
+.onboarding-panel .field{margin:12px 0}.onboarding-panel .btnrow{margin-top:25px}.onboarding-panel .btnrow .btn{flex:1}
+.onboarding-progress{height:5px;background:var(--sub);border-radius:20px;margin:16px 0;overflow:hidden}.onboarding-progress span{display:block;height:100%;background:var(--blue);transition:width .2s}
+.swipe-nutrient{touch-action:pan-y;user-select:none}

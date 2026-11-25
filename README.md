@@ -1,3 +1,33 @@
+# Weight App – v0.11.0
+
+## Was ist neu?
+
+- Kalorien sind immer sichtbar; Eiweiß/Zucker wird als zweite Kennzahl in der bestehenden Karte angezeigt. Die zweite Startseitenkarte wechselt per horizontalem Wischen, und die Wahl ist auch in den Einstellungen gespeichert.
+- Richtwert für **Gesamtzucker**: 90 g/Tag (EU-Kennzeichnungsreferenz, keine gesundheitliche Obergrenze, kein Mindestziel). Individuell anpassbar.
+- Zuckerwerte in Tageskarten, Mahlzeitenvorschauen, Ernährungstagebuch und Diagramm; Eingabefelder für Zucker bei Lebensmitteln, Getränken und direkten Gerichten. Wenn ein bisheriger Snapshot keine Zuckerwerte trägt, wird ein bekannter Katalogwert über dessen ID herangezogen.
+- Einstellungen: JSON-Import und -Export in getauschter Reihenfolge; roter, kleiner Löschbutton mit bisheriger Sicherheitsabfrage.
+- Fortschritt: Die Prognose beruht auf den jüngsten vier Wochenmittelwerten, startet am letzten geglätteten Gewicht und wird nicht an den alten Achsengrenzen abgeschnitten. Der kombinierte Vergleich nutzt denselben auswählbaren 4-/8-/12-Wochen-Zeitraum für Kalorien und Gewicht; fehlerhafte Trendobjektbehandlung entfällt.
+- Neuer 3-stufiger Erststart für frisch angelegte Datenbanken: Gewichtsziele, Kalorienbedarf, Ernährungsziele. Gewichtserhaltung möglich, vorhandene Backups können direkt importiert werden; vorhandene Nutzer werden nicht erneut eingerichtet.
+- Leerzustände für fehlende Gewichts-/Ernährungsdaten; keine demonstrativen Messwerte. Vorhandene Daten bleiben lokal erhalten und bestehende Backups sind weiterhin importierbar.
+
+**Technische Prüfung:** Syntaxchecks und Node-Funktionstests auf Basis eines realen Backups sowie einer leeren Datenbank und einem vollständig durchlaufenen Setup erfolgreich. Die Browser-Testumgebung blockierte lokale URL-Aufrufe; vollständige Interaktion auf einem Mobilgerät daher nicht verifiziert.
+
+**Wichtig:** Vor Updates weiterhin ein JSON-Backup exportieren und sicher aufbewahren. Ein JSON-Import ersetzt die bestehenden lokalen Daten.
+
+---
+
+# Weight App – v0.10.1
+
+## v0.10.0 – gemeinsame Ernährungsverwaltung & Training
+
+- Lebensmittel und Gerichte werden gemeinsam durchsucht, mit optionalen Filtern.
+- Gemeinsame Mengenansicht; Gramm für Gerichte nur bei bekanntem Portionsgewicht.
+- Lebensmittel, Gerichte und Getränke gemeinsam verwalten; Gerichte bearbeiten oder entfernen.
+- Neue Einträge über direkte Nährwerteingabe oder aus Zutaten erstellen.
+- Trainierte Übungen schließen sich beim Markieren, Pausentimer ist außerhalb der Übungskarte auch in der Liste sichtbar.
+- Pausentimer zeigt Endzustand korrekt; Trainingsabschluss beendet die aktive Einheit und die Timer nach dem Speichern.
+- Bestehende Tages- und Rezeptdaten bleiben gespeichert, Änderungen an Vorlagen wirken nicht auf bereits erfasste Mahlzeiten.
+
 # Weight App – v0.9.1
 
 - Gewichtstrend als Differenz zweier aufeinanderfolgender 7-Tage-Mittelwerte (mindestens zwei Messungen je Zeitraum).
@@ -84,3 +114,11 @@ Trainingsmodus mit automatisch erfasster Zeit, 30 kuratierten Übungen, optional
 - Wiederherstellung der Listenposition nach Mengenauswahl
 - Vereinfachte Portionssteuerung inklusive manueller Eingabe
 - Lokale Vorschläge für häufig gemeinsam erfasste Lebensmittel (ab zwei gemeinsamen Mahlzeiten)
+
+
+## v0.10.1 – Zucker-Katalog
+- Zucker (`sugar`, Gramm je 100 g/ml) mit `sugarQuality` und `sugarSource` für Lebensmittel, Getränke und Gerichte.
+- `null` bedeutet fehlende valide Angabe – nie null Gramm Zucker. Die Mehrzahl der Angaben zu Eigenrezepten ist als Schätzung gekennzeichnet.
+- Bestandsdaten werden beim Laden behutsam ergänzt, historische Tagebuch-Snapshots bleiben unverändert.
+- Einheitliche Icon-Auswahl für Lebensmittel, Getränke und Gerichte; sachlich unpassende Icons korrigiert.
+- Die Anzeige von Zuckerwerten bleibt einem späteren gemeinsamen UX-Konzept vorbehalten.

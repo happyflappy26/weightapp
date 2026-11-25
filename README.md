@@ -1,4 +1,4 @@
-# Weight App – v0.11.0
+# Weight App – v0.11.1
 
 ## Was ist neu?
 
@@ -122,3 +122,8 @@ Trainingsmodus mit automatisch erfasster Zeit, 30 kuratierten Übungen, optional
 - Bestandsdaten werden beim Laden behutsam ergänzt, historische Tagebuch-Snapshots bleiben unverändert.
 - Einheitliche Icon-Auswahl für Lebensmittel, Getränke und Gerichte; sachlich unpassende Icons korrigiert.
 - Die Anzeige von Zuckerwerten bleibt einem späteren gemeinsamen UX-Konzept vorbehalten.
+
+## v0.11.1
+- Daten löschen linksbündig, Größe und Sicherheitsbestätigung unverändert.
+- Eiweiß-/Zucker-Karte mit kleiner 1/2- bzw. 2/2-Anzeige oben rechts, ohne Layoutverschiebung.
+- Zuckerfarben auf Hellblau (#7DBFE3) umgestellt.

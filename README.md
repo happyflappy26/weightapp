@@ -1,6 +1,6 @@
 # Weight App
 
-**Version 0.11.5 · Offlinefähiges Ernährungs-, Gewichts- und Trainingstagebuch (PWA)**
+**Version 0.11.7 · Offlinefähiges Ernährungs-, Gewichts- und Trainingstagebuch (PWA)**
 
 Die Weight App funktioniert ohne Benutzerkonto. Persönliche Daten bleiben standardmäßig im lokalen Browser-Speicher (IndexedDB). Die Webseite kann beispielsweise über GitHub Pages bereitgestellt und auf dem Smartphone zum Startbildschirm hinzugefügt werden.
 
@@ -86,6 +86,8 @@ Die lokale IndexedDB heißt `aufbau-db`; sie enthält u. a. Einstellungen, Gewic
 
 | Version | Änderungen |
 |---|---|
+| **0.11.7** | Süßkartoffelstampf mit Marshmallows auf 400 g Süßkartoffeln skaliert; übrige Zutaten proportional und Nährwerte angepasst. Bestehende unveränderte Standardrezepte werden aktualisiert. |
+| **0.11.6** | Die vier Thanksgiving-Rezepte auf 1 Portion = gesamtes Rezept umgestellt; 0,5 Portion = halbes Rezept. Bestehende unveränderte Vorlagen werden aktualisiert. |
 | **0.11.5** | Zuckerzusatzkatalog mit Hauptkatalog zusammengeführt; veraltete Referenzen entfernt; README neu geordnet. |
 | **0.11.4** | Vier Thanksgiving-Gerichte auf zwei Portionen pro Gesamtrezept umgestellt, Bohnen mit Bacon neu berechnet. |
 | **0.11.3** | Zwei Gerichte umbenannt. |

@@ -84,6 +84,52 @@ async function seedCatalog(){
     }
     S.meta.thanksgivingHalfPortionsV0114=true;changed=true;
   }
+  // v0.11.6: Eine Portion entspricht wieder dem gesamten Thanksgiving-Rezept.
+  // Nur unveränderte Standardrezepte von v0.11.4/0.11.5 aktualisieren.
+  // Individuell bearbeitete Vorlagen und historische Mahlzeit-Snapshots bleiben erhalten.
+  if(!S.meta.thanksgivingWholeRecipeV0116){
+    const previous={
+      'catalog-recipe-thanksgiving-sweetpotato-2026':[1158,13.8,72.6],
+      'catalog-recipe-thanksgiving-creamy-corn-2026':[394,11.2,13.6],
+      'catalog-recipe-thanksgiving-crispy-wings-2026':[772,43.6,20],
+      'catalog-recipe-thanksgiving-greenbeans-2026':[159,7.9,3.8]
+    };
+    for(const recipe of S.recipes){
+      const old=previous[recipe.id], standard=RECIPE_CATALOG_BY_ID.get(recipe.id);
+      if(!old||!standard||recipe.servings!==2||recipe.items?.length!==1||!recipe.directNutrition)continue;
+      const snap=recipe.items[0]?.snapshot;
+      if(!snap||Math.abs(Number(snap.portionNutrition?.kcal)-old[0])>0.001||
+        Math.abs(Number(snap.portionNutrition?.protein)-old[1])>0.001||
+        Math.abs(Number(snap.portionNutrition?.sugar)-old[2])>0.001||
+        Math.abs(Number(snap.kcal)-old[0])>0.001||
+        Math.abs(Number(snap.protein)-old[1])>0.001||
+        Math.abs(Number(snap.sugar)-old[2])>0.001||
+        recipe.name!==standard.name||recipe.icon!==standard.icon||
+        recipe.note!==standard.note.replace('Eine Portion entspricht dem vollständigen Rezept:','Das vollständige Rezept ergibt zwei Portionen. Eine Portion ist die Hälfte:'))continue;
+      Object.assign(recipe,structuredClone(standard));changed=true;
+    }
+    S.meta.thanksgivingWholeRecipeV0116=true;changed=true;
+  }
+  // v0.11.7: Das vollständige Süßkartoffel-Rezept auf 400 g Süßkartoffeln skalieren.
+  // Nur die unveränderte Vorlage aktualisieren; eigene Anpassungen und historische Einträge bewahren.
+  if(!S.meta.thanksgivingSweetPotato400V0117){
+    const id='catalog-recipe-thanksgiving-sweetpotato-2026';
+    const standard=RECIPE_CATALOG_BY_ID.get(id);
+    const oldNote='Direkt eingegebene Nährwerte pro Portion (ohne Zutatenliste). Eine Portion entspricht dem vollständigen Rezept: 1 kg Süßkartoffeln, 50 g Butter, 60 ml Milch, 50 ml Ahornsirup, Zimt, Vanilleextrakt, Salz, 80 g Pekannüsse und 100 g Mini-Marshmallows.';
+    for(const recipe of S.recipes){
+      if(recipe.id!==id||!standard||recipe.items?.length!==1||!recipe.directNutrition||recipe.servings!==1)continue;
+      const snap=recipe.items[0]?.snapshot;
+      if(!snap||recipe.name!==standard.name||recipe.icon!==standard.icon||recipe.note!==oldNote)continue;
+      if(Math.abs(Number(snap.portionNutrition?.kcal)-2316)>0.001 ||
+         Math.abs(Number(snap.portionNutrition?.protein)-27.6)>0.001 ||
+         Math.abs(Number(snap.portionNutrition?.sugar)-145.2)>0.001 ||
+         Math.abs(Number(snap.kcal)-2316)>0.001 ||
+         Math.abs(Number(snap.protein)-27.6)>0.001 ||
+         Math.abs(Number(snap.sugar)-145.2)>0.001)continue;
+      Object.assign(recipe,structuredClone(standard));changed=true;
+    }
+    S.meta.thanksgivingSweetPotato400V0117=true;changed=true;
+  }
   // v0.8.3: Gerichte aus der Lebensmittel-Auswahl entfernen. Bereits gespeicherte
   // Rezept-Snapshots und Tagebucheinträge bleiben unverändert. Individuell
   // bearbeitete Katalog-Lebensmittel bleiben zum Schutz der Anpassungen bestehen.

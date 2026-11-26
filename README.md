@@ -1,129 +1,104 @@
-# Weight App – v0.11.1
+# Weight App
 
-## Was ist neu?
+**Version 0.11.5 · Offlinefähiges Ernährungs-, Gewichts- und Trainingstagebuch (PWA)**
 
-- Kalorien sind immer sichtbar; Eiweiß/Zucker wird als zweite Kennzahl in der bestehenden Karte angezeigt. Die zweite Startseitenkarte wechselt per horizontalem Wischen, und die Wahl ist auch in den Einstellungen gespeichert.
-- Richtwert für **Gesamtzucker**: 90 g/Tag (EU-Kennzeichnungsreferenz, keine gesundheitliche Obergrenze, kein Mindestziel). Individuell anpassbar.
-- Zuckerwerte in Tageskarten, Mahlzeitenvorschauen, Ernährungstagebuch und Diagramm; Eingabefelder für Zucker bei Lebensmitteln, Getränken und direkten Gerichten. Wenn ein bisheriger Snapshot keine Zuckerwerte trägt, wird ein bekannter Katalogwert über dessen ID herangezogen.
-- Einstellungen: JSON-Import und -Export in getauschter Reihenfolge; roter, kleiner Löschbutton mit bisheriger Sicherheitsabfrage.
-- Fortschritt: Die Prognose beruht auf den jüngsten vier Wochenmittelwerten, startet am letzten geglätteten Gewicht und wird nicht an den alten Achsengrenzen abgeschnitten. Der kombinierte Vergleich nutzt denselben auswählbaren 4-/8-/12-Wochen-Zeitraum für Kalorien und Gewicht; fehlerhafte Trendobjektbehandlung entfällt.
-- Neuer 3-stufiger Erststart für frisch angelegte Datenbanken: Gewichtsziele, Kalorienbedarf, Ernährungsziele. Gewichtserhaltung möglich, vorhandene Backups können direkt importiert werden; vorhandene Nutzer werden nicht erneut eingerichtet.
-- Leerzustände für fehlende Gewichts-/Ernährungsdaten; keine demonstrativen Messwerte. Vorhandene Daten bleiben lokal erhalten und bestehende Backups sind weiterhin importierbar.
+Die Weight App funktioniert ohne Benutzerkonto. Persönliche Daten bleiben standardmäßig im lokalen Browser-Speicher (IndexedDB). Die Webseite kann beispielsweise über GitHub Pages bereitgestellt und auf dem Smartphone zum Startbildschirm hinzugefügt werden.
 
-**Technische Prüfung:** Syntaxchecks und Node-Funktionstests auf Basis eines realen Backups sowie einer leeren Datenbank und einem vollständig durchlaufenen Setup erfolgreich. Die Browser-Testumgebung blockierte lokale URL-Aufrufe; vollständige Interaktion auf einem Mobilgerät daher nicht verifiziert.
+## 1. Installation und Update
 
-**Wichtig:** Vor Updates weiterhin ein JSON-Backup exportieren und sicher aufbewahren. Ein JSON-Import ersetzt die bestehenden lokalen Daten.
+1. In der laufenden App unter **Einstellungen** ein **JSON-Backup exportieren** und sicher aufbewahren.
+2. Den **Inhalt** des Ordners `weight-app/` ins Wurzelverzeichnis des vorhandenen GitHub-Pages-Repositories kopieren; Dateien überschreiben und **entfernte Dateien ebenfalls löschen** (ab v0.11.5 insbesondere `sugar-catalog.js`).
+3. Webseite öffnen beziehungsweise neu laden. Bei Offline-Nutzung kann ein erneutes Laden erforderlich sein, bis der neue Service Worker aktiv ist.
+4. Ein Update der Webdateien verändert normalerweise nicht die lokal gespeicherten Ernährungs-, Gewichts- und Trainingsdaten.
 
----
+**Wichtig:** Die Datenbank befindet sich im jeweiligen Browser und auf dem jeweiligen Gerät. Anderer Browser, Privatmodus oder Löschen der Websitedaten können zu einer leeren Datenbank führen. Ein **JSON-Import ersetzt** den aktuellen lokalen Datenbestand; vorher unbedingt exportieren.
 
-# Weight App – v0.10.1
+### Neuinstallation
 
-## v0.10.0 – gemeinsame Ernährungsverwaltung & Training
+Beim ersten Start führt ein dreistufiger Assistent durch Gewichtsziel, Kalorienbedarf und Ernährungsziele. Stattdessen kann ein vorhandenes JSON-Backup importiert werden. Bestehende Installationen werden nicht erneut eingerichtet.
 
-- Lebensmittel und Gerichte werden gemeinsam durchsucht, mit optionalen Filtern.
-- Gemeinsame Mengenansicht; Gramm für Gerichte nur bei bekanntem Portionsgewicht.
-- Lebensmittel, Gerichte und Getränke gemeinsam verwalten; Gerichte bearbeiten oder entfernen.
-- Neue Einträge über direkte Nährwerteingabe oder aus Zutaten erstellen.
-- Trainierte Übungen schließen sich beim Markieren, Pausentimer ist außerhalb der Übungskarte auch in der Liste sichtbar.
-- Pausentimer zeigt Endzustand korrekt; Trainingsabschluss beendet die aktive Einheit und die Timer nach dem Speichern.
-- Bestehende Tages- und Rezeptdaten bleiben gespeichert, Änderungen an Vorlagen wirken nicht auf bereits erfasste Mahlzeiten.
+## 2. Funktionen
 
-# Weight App – v0.9.1
+### Heute
 
-- Gewichtstrend als Differenz zweier aufeinanderfolgender 7-Tage-Mittelwerte (mindestens zwei Messungen je Zeitraum).
-- Kalorien & Gewichtsentwicklung gemeinsam unter Fortschritt; vorsichtige Einordnung erst mit ausreichenden Daten.
-- Kalorienbilanz pro erfasstem abgeschlossenem Tag in Ernährung; dynamische Null-verankerte Skalierung.
-- Prognosetext unter Gewichtsdiagramm, ohne redundanten Prognoseblock unter Zielphasen.
-- Keine automatischen Zieländerungen. Datenhaltung weiterhin lokal (IndexedDB); vor jedem Update JSON-Backup empfehlenswert.
+- Tagesbilanz mit **Kalorien** und wahlweise **Eiweiß oder Zucker** (zweite Karte horizontal wischen; Position `1/2` beziehungsweise `2/2`).
+- Gewichts- und Zielübersicht; schneller Zugriff auf Ernährung und Gewichtserfassung.
+- Kalorienziel, Eiweißziel und Zucker-Richtwert sind in den Einstellungen anpassbar. Standard für Gesamtzucker: **90 g/Tag** als EU-Kennzeichnungsreferenz, **keine** gesundheitliche Obergrenze und kein Mindestziel.
 
-# Weight App – v0.7.0
+### Ernährung
 
-- Einstellungen jetzt von allen vier Hauptansichten erreichbar.
-- Gewicht: 7-Tage-Trend aus der ersten und letzten vorhandenen Messung innerhalb der letzten sieben Kalendertage (keine Hochrechnung).
-- Ernährung: Die Bilanz über abgeschlossene erfasste Tage und das Diagramm verwenden denselben wählbaren Zeitraum (7, 30, 90 Tage); heute bleibt vorläufig und außerhalb der Bilanz.
-- Gewichtsdiagramm: Messpunkte immer sichtbar, Durchschnittslinie entfernt, zuschaltbare rückblickende 7-Tage-Glättung ab 3 Messungen über mindestens 7 Tage.
-- Prognose: Optional im Diagramm ab 3 Monaten, frühestens 8 Messungen über 4 Wochen mit stabiler Entwicklung; geschätztes Zielerreichungsdatum unabhängig vom Diagrammzeitraum bei Zielphasen. Prognosen sind unverbindliche Schätzungen.
+- Gemeinsame Suche über Lebensmittel und Gerichte, zusätzliche Filter, zuletzt/häufig verwendet.
+- Mahlzeiten aus mehreren Einträgen zusammenstellen; einheitliche Mengenauswahl für Lebensmittel und Gerichte, wo das Portionsgewicht bekannt ist.
+- Getränke einschließlich Wasser erfassen; Kalorien, Eiweiß und Zucker für passende Portionsgrößen berechnen.
+- Eigene Lebensmittel/Drinks und Gerichte mit Zutaten oder direkten Nährwerten anlegen und bearbeiten.
+- Verlauf mit Kalorienbilanz sowie Eiweiß- oder Zuckeranzeige; heutiger Tag bleibt vorläufig. Nicht erfasste Tage sind keine dokumentierten Null-Tage.
+- Werte sind Orientierungshilfen: insbesondere bei Rezepten sind Portionsgrößen und Nährwerte teils geschätzt.
 
-## Update
-JSON-Backup exportieren, dann den **Inhalt** dieses `weight-app/`-Ordners in das Wurzelverzeichnis des bestehenden GitHub-Pages-Repositories kopieren; bisherige Dateien überschreiben. Website-Adresse nicht ändern. Die bestehende IndexedDB bleibt unverändert.
+### Fortschritt
 
+- Gewicht, Wochenmittel, 7-Tage-Trend und optional geglätteter Verlauf.
+- Optionale Zielprognose anhand verfügbarer Daten; keine Garantie für eine bestimmte Entwicklung.
+- Gemeinsamer Vergleich von Kalorienbilanz und Gewicht über denselben 4-, 8- oder 12-Wochen-Zeitraum mit Hinweisen zur Datenabdeckung.
+- Körpermaße nach individueller Datenverfügbarkeit.
 
-## Änderungen v0.7.2
-- Getränke: gewähltes Getränk, Menge, Datum und Speichern oberhalb der Suche; die Auswahl erscheint erst, nachdem ein Getränk gewählt wurde.
-- Mahlzeiten: Zusammenfassung erst sichtbar, wenn mindestens ein Bestandteil hinzugefügt wurde.
-- Auswahlfeedback für Lebensmittel, Gerichte und Getränke; Mengenchips markieren den tatsächlich eingestellten Wert.
-- Heute: Kalorien- und Eiweißkarten führen ohne optische Änderung direkt zur entsprechenden Ernährungsanalyse.
-- Einstellungen: Schließen-X oben rechts führt zurück zur vorherigen Hauptseite.
-- Bestehende lokale Datenbank `aufbau-db` und alle Stores bleiben unverändert.
+### Training
 
+- 30 kuratierte Übungen und lokale Übungsbilder/Illustration, Vollbildansicht für Bilder.
+- Laufende Trainingssitzung mit Trainingsdauer, markierten Übungen und Pausentimer.
+- Abschließen einer Übung führt zurück zur Liste, der Pausentimer bleibt in der Liste sichtbar.
+- Nach erfolgreicher Speicherung wird die Trainingssitzung samt Timern beendet.
 
-## Neu in v0.7.2 – Lebensmittelverwaltung
-- Lebensmittel und Getränke per Drei-Punkte-Menü direkt in der Suche bearbeiten oder aus der Auswahl entfernen.
-- Einstellungen → Lebensmittel verwalten: Suche und Filter für Lebensmittel/Getränke sowie Bearbeiten/Entfernen.
-- Bearbeiten: Name, Kategorie, Icon, kcal/Eiweiß je 100 g/ml, Barcode und beliebige Portionsgrößen.
-- Entfernen mit Sicherheitsabfrage; Standardkatalogeinträge bleiben auf diesem Gerät ausgeblendet, statt beim nächsten Update wiederzukommen.
-- Historische Mahlzeiten/Getränke und gespeicherte Rezepte mit Nährwert-Snapshots werden nicht rückwirkend verändert.
-- Die lokale IndexedDB `aufbau-db` und JSON-Backup-Struktur bleiben kompatibel.
+### Einstellungen und Daten
 
-## Änderungen v0.7.4
-- Energiebilanz: Grün nur bei erreichtem Tagesziel; neutral-grauer Balken, solange das Ziel nicht erreicht ist. Heute nutzt dieselbe statusabhängige Farbe mit reduzierter Deckkraft (kein orangefarbener Sonderstatus). Legende präzisiert.
-- Körpermaßdiagramme (Taille, Brust, Oberarm): jeweils frühestens ab dem ersten Messdatum; bei einem Messwert ein einzelner beschrifteter Punkt ohne Linie, ab zwei Messwerten Messpunktlinie; individuell passende cm-Achse und Datumsbeschriftung. Ohne zweiten Wert: „Noch kein Vergleichswert“.
-- Bestehende IndexedDB-Struktur und alle anderen Screens bleiben unverändert.
+- Start-/Zielgewicht, Kalorien- und Nährwertziele, Anzeigepräferenz sowie Theme verwalten.
+- Lebensmittel, Getränke und Gerichte bearbeiten oder ausblenden.
+- **JSON exportieren**, **JSON importieren** sowie separat bestätigtes **Alle Daten löschen**.
+- Offline-Cache mit Service Worker; alle vorgesehenen Übungsbilder liegen lokal.
 
+## 3. Datenmodell und technische Struktur
 
-## v0.7.4
-- Mittelmeer Penne mit Hirtenkäse & Spinat als Lebensmittel und Gericht (720-g-Portion mit separat bewahrten Original-Portionswerten).
-- Umfangreichere Icon-Auswahl für eigene Lebensmittel und Getränke; alle Katalog-Icons verfügbar.
-- Passendere Standardsymbole für Lebensmittel, Getränke und gespeicherte Gerichte.
-- Bestehende Standardprodukte werden nur beim alten unveränderten Symbol automatisch angepasst; individuelle Icons bleiben erhalten.
-- Bekannte selbst angelegte Einträge aus der Sicherung erhalten statt generischer Icons passende Symbole; historische Mahlzeiten-Snapshots bleiben unverändert.
+| Datei | Aufgabe |
+|---|---|
+| `index.html` | Einstiegspunkt, bindet CSS und JavaScript ein |
+| `styles.css` | Darstellung, inklusive responsiver Ansichten |
+| `catalog.js` | **Einzige Standarddatenquelle** für Lebensmittel, Getränke und Gerichte, einschließlich kcal, Eiweiß, Zucker, Icons und Quellenhinweisen |
+| `app.js` | UI, Berechnungen, Eintragserfassung, IndexedDB-Zugriff, Migrationen |
+| `sw.js` | Offline-Cache und Update-Kennung |
+| `manifest.webmanifest` | PWA-Metadaten |
+| `exercise-images/` | Lokal bereitgestellte Übungsbilder |
+| `EXERCISE-IMAGE-LICENSE.txt` | Bildnachweis und Lizenzangaben |
 
+`sugar-catalog.js` wurde in **v0.11.5 entfernt**. Zuckerwerte stehen bereits unmittelbar an den Datensätzen in `catalog.js`. Einträge haben stabile IDs. Die App ergänzt ältere lokal gespeicherte Einträge behutsam und verwendet die Standardwerte als Rückfalloption für historische Tagebuch-Snapshots ohne Zuckerangabe. Individuelle Nährwerte, bisherige Tagebuch-Einträge und Backups bleiben erhalten.
 
-## v0.8.0 – Training
-Trainingsmodus mit automatisch erfasster Zeit, 30 kuratierten Übungen, optionaler Übungsauswahl, Pausentimer und Vorschlags-/Häufigkeitssortierung. Laufende Einheiten werden lokal gesichert. Die Übungsbilder sind aktuell offlinefähige **schematische Platzhalterillustrationen**, noch keine Übungsfotos. Bestehende Trainings- und Backupdaten bleiben kompatibel.
+Die lokale IndexedDB heißt `aufbau-db`; sie enthält u. a. Einstellungen, Gewicht, Lebensmittel, Gerichte, Mahlzeiten, Getränke, Training und Metadaten. Der aktive Trainingszustand wird zusätzlich lokal zwischengespeichert. Historische Mahlzeiten verwenden Nährwert-Snapshots, damit spätere Änderungen an Vorlagen die alten kcal-/Eiweißwerte nicht rückwirkend ändern.
 
-## v0.8.1 – Offline-Übungsfotos
-- 29 Übungen mit lokalen Fotos (meist zwei Bewegungsphasen), aus Free Exercise DB (Unlicense); Bilder als optimierte WebP-Dateien.
-- Bird Dog bleibt als schematische Illustration, da kein passendes Foto im gelieferten Archiv vorhanden ist.
-- Die Diamant-Liegestütze verwendet ein Foto einer verwandten engen Variante; in der Detailansicht transparent gekennzeichnet.
-- Alle Fotos sind Teil des Service-Worker-Offline-Caches.
-- Die bestehende Trainings-Datenbank und die JSON-Backups bleiben unverändert.
-- Bildquelle: https://github.com/yuhonas/free-exercise-db (Lizenz: Unlicense, Original-Lizenz liegt im Archiv bei).
+**Achtung bei Änderungen am Katalog:** Einträge nicht einfach anhand des Namens zusammenführen oder umbenennen. Die IDs werden auch für frühere Aufzeichnungen, nutzerspezifische Anpassungen und Migrationen verwendet. Datenmigrationen müssen alte, individuell geänderte Werte erhalten.
 
-## v0.8.2 – Trainingsansicht kompakter
-- Trainingsabschluss und Verwerfen mit Abstand.
-- Pausentimer auf jeder Übungsdetailseite, nicht mehr als Kachel im Trainingsstartbildschirm.
-- Bilder ohne separate quadratische Container, über die gesamte Kartenbreite.
-- Fotos per Antippen fullscreen öffnen und per Antippen oder Escape schließen.
-- Bestehende Trainingsdaten, Backups und Übungsfotos unverändert.
+## 4. Bekannte Grenzen
 
-## Änderungen v0.8.3
-- Neues Gericht „Glasnudeln mit Tofu und Pilzen“: 123 kcal und 6,9 g Eiweiß / 100 g; 690 kcal und 38,5 g Eiweiß pro Portion.
-- Im Menü **Mahlzeit hinzufügen → Gerichte → Neues Gericht** können Gerichte ohne Zutatenliste erfasst werden: mit Gesamtwerten je Portion (optional Portionsgewicht) oder je 100 g.
-- Bisher als Lebensmittel eingestellte vorbereitete Hauptgerichte aus dem Standardkatalog werden nur dann aus der Lebensmittel-Auswahl entfernt, wenn die Standardwerte unverändert geblieben sind und das Gericht bereits als Rezept vorhanden ist. Sie bleiben als gespeicherte Gerichte auswählbar. Individuelle Änderungen und Tagebuch-Snapshots bleiben erhalten.
-- Datenbank und Backup-Format unverändert; GitHub-Pages-Update durch Ersetzen der Dateien im bestehenden Repository.
+- Nährwerte aus Nutzereingaben, Produktangaben und Schätzungen sind nicht als laborgenau anzusehen.
+- Die angezeigte Größe `Zucker` meint **Gesamtzucker („davon Zucker“)**, nicht speziell freie oder zugesetzte Zucker.
+- Eine Prognose benötigt genügend zeitlich verteilte Gewichtsdaten. Lückenhafte Ernährungseinträge begrenzen die Aussagekraft der kombinierten Auswertung.
+- Die Daten werden nicht automatisch zwischen Geräten synchronisiert; dafür ist ein manueller JSON-Export/-Import vorgesehen.
+- Änderungen wurden per Syntax- und gezielten Logikprüfungen überprüft; vollständige Interaktion auf jedem mobilen Browser ist damit nicht garantiert.
 
+## 5. Versionsverlauf (neueste zuerst)
 
-## v0.8.5
-- Fortschritt: kompakte Energiebilanz-Hinweise als „Bilanz: +X kcal“ unter Seit Phasenstart und 7-Tage-Trend.
-- Service-Worker-Cache für die neue Version aktualisiert.
+| Version | Änderungen |
+|---|---|
+| **0.11.5** | Zuckerzusatzkatalog mit Hauptkatalog zusammengeführt; veraltete Referenzen entfernt; README neu geordnet. |
+| **0.11.4** | Vier Thanksgiving-Gerichte auf zwei Portionen pro Gesamtrezept umgestellt, Bohnen mit Bacon neu berechnet. |
+| **0.11.3** | Zwei Gerichte umbenannt. |
+| **0.11.2** | Vier Gerichte als bearbeitbare Vorlagen ergänzt. |
+| **0.11.1** | Zucker in Hellblau, kleine `1/2`-/`2/2`-Anzeige; Datenlöschen linksbündig. |
+| **0.11.0** | Zuckeranzeige und Richtwert, überarbeitete Prognose und Vergleichsansicht, dreistufiger Erststart. |
+| **0.10.1** | Zuckerwerte und Icon-Korrekturen, einheitlicher Icon-Katalog. |
+| **0.10.0** | Gemeinsame Lebensmittelsuche und Gerichteverwaltung; Trainingsabschluss und Timerabläufe verbessert. |
+| **0.9.2** | Kompaktere Mahlzeitenerfassung, Abschlussansicht, Listenposition und Kombinationsvorschläge. |
+| **0.9.x** | Gewichtstrend, Energiebilanz und gemeinsame Fortschrittskarte erweitert. |
+| **0.8.x** | Trainingsmodus mit Übungsbildern; Gerichte mit direkter Nährwerteingabe. |
+| **0.7.x** | Lebensmittelverwaltung, verfeinerte Ernährungsdiagramme, Maße und Prognosegrundlagen. |
 
+### Lizenzhinweis für Übungsbilder
 
-## v0.9.2 – Mahlzeiten-UX
-- Kompakte Mahlzeitenzusammenfassung und separate Prüfung/Speicherung
-- Wiederherstellung der Listenposition nach Mengenauswahl
-- Vereinfachte Portionssteuerung inklusive manueller Eingabe
-- Lokale Vorschläge für häufig gemeinsam erfasste Lebensmittel (ab zwei gemeinsamen Mahlzeiten)
-
-
-## v0.10.1 – Zucker-Katalog
-- Zucker (`sugar`, Gramm je 100 g/ml) mit `sugarQuality` und `sugarSource` für Lebensmittel, Getränke und Gerichte.
-- `null` bedeutet fehlende valide Angabe – nie null Gramm Zucker. Die Mehrzahl der Angaben zu Eigenrezepten ist als Schätzung gekennzeichnet.
-- Bestandsdaten werden beim Laden behutsam ergänzt, historische Tagebuch-Snapshots bleiben unverändert.
-- Einheitliche Icon-Auswahl für Lebensmittel, Getränke und Gerichte; sachlich unpassende Icons korrigiert.
-- Die Anzeige von Zuckerwerten bleibt einem späteren gemeinsamen UX-Konzept vorbehalten.
-
-## v0.11.1
-- Daten löschen linksbündig, Größe und Sicherheitsbestätigung unverändert.
-- Eiweiß-/Zucker-Karte mit kleiner 1/2- bzw. 2/2-Anzeige oben rechts, ohne Layoutverschiebung.
-- Zuckerfarben auf Hellblau (#7DBFE3) umgestellt.
+Die lokalen Übungsbilder stammen überwiegend aus [Free Exercise DB](https://github.com/yuhonas/free-exercise-db) (Unlicense). Einzelne Übungen besitzen nur eine Illustration beziehungsweise eine verwandte Bildvariante. Details stehen in `EXERCISE-IMAGE-LICENSE.txt`.

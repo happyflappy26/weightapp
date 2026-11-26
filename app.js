@@ -47,6 +47,43 @@ async function seedCatalog(){
   let changed=false;
   for(const f of FOOD_CATALOG)if(!hasFood.has(f.id)){S.foods.push(structuredClone(f));changed=true}
   for(const r of RECIPE_CATALOG)if(!hasRecipe.has(r.id)){S.recipes.push(structuredClone(r));changed=true}
+  // v0.11.3: Rename the two Thanksgiving recipes on existing installations.
+  // Only rename unchanged standard names. Preserve any custom names, nutrition and historical entries.
+  if(!S.meta.thanksgivingNamesV0113){
+    const renames={
+      'catalog-recipe-thanksgiving-sweetpotato-2026':['Süßkartoffelauflauf mit Marshmallows, Pekannüssen & Ahornsirup','Süßkartoffelstampf mit Marshmallows'],
+      'catalog-recipe-thanksgiving-greenbeans-2026':['Grüne Bohnen in cremiger Sauce','Bohnen in Bacon gerollt']
+    };
+    for(const recipe of S.recipes){
+      const pair=renames[recipe.id];
+      if(!pair || recipe.name!==pair[0])continue;
+      recipe.name=pair[1];changed=true;
+      for(const item of recipe.items||[]){
+        if(item.snapshot?.name===pair[0]){item.snapshot.name=pair[1];changed=true}
+      }
+    }
+    S.meta.thanksgivingNamesV0113=true;changed=true;
+  }
+  // v0.11.4: Upgrade unchanged Thanksgiving default recipes to half-recipe portions.
+  // Keep custom recipe adjustments and all historical food snapshots unchanged.
+  if(!S.meta.thanksgivingHalfPortionsV0114){
+    const previous={
+      'catalog-recipe-thanksgiving-sweetpotato-2026':[386,4.6,24.2,6],
+      'catalog-recipe-thanksgiving-creamy-corn-2026':[197,5.6,6.8,4],
+      'catalog-recipe-thanksgiving-crispy-wings-2026':[386,21.8,10,4],
+      'catalog-recipe-thanksgiving-greenbeans-2026':[77,4.3,6.5,4]
+    };
+    for(const recipe of S.recipes){
+      const old=previous[recipe.id], standard=RECIPE_CATALOG.find(r=>r.id===recipe.id);
+      if(!old||!standard)continue;
+      const item=recipe.items?.[0], snap=item?.snapshot;
+      if(!snap||recipe.items.length!==1||recipe.servings!==old[3]||Math.abs(Number(snap.kcal)-old[0])>0.001||Math.abs(Number(snap.protein)-old[1])>0.001||Math.abs(Number(snap.sugar)-old[2])>0.001)continue;
+      // Entire recipe object is the original standard; set current default while preserving stable ID.
+      Object.assign(recipe,structuredClone(standard));
+      changed=true;
+    }
+    S.meta.thanksgivingHalfPortionsV0114=true;changed=true;
+  }
   // v0.8.3: Gerichte aus der Lebensmittel-Auswahl entfernen. Bereits gespeicherte
   // Rezept-Snapshots und Tagebucheinträge bleiben unverändert. Individuell
   // bearbeitete Katalog-Lebensmittel bleiben zum Schutz der Anpassungen bestehen.
@@ -90,9 +127,9 @@ const ICON_REVIEW_CHANGES={"01a99175-97ce-4ca6-9474-4a6372faa132":["🍽️","�
 async function migrateSugarCatalog(){
  let changed=false;
  const iconChanges=ICON_REVIEW_CHANGES;
- for(const [store,source] of [['foods',SUGAR_CATALOG.foods],['recipes',SUGAR_CATALOG.recipes]]){
+ for(const store of ['foods','recipes']){
   for(const row of S[store]){
-   const official=source[row.id] || (store==='foods'?FOOD_CATALOG.find(x=>x.id===row.id):RECIPE_CATALOG.find(x=>x.id===row.id));
+   const official=store==='foods'?FOOD_CATALOG_BY_ID.get(row.id):RECIPE_CATALOG_BY_ID.get(row.id);
    if(!official)continue;
    if(!Object.prototype.hasOwnProperty.call(row,'sugar')){
     row.sugar=official.sugar??null;
@@ -114,7 +151,7 @@ async function migrateSugarCatalog(){
 
 async function persist(){return new Promise((resolve,reject)=>{let t=db.transaction(STORES,'readwrite');for(let store of STORES){const o=t.objectStore(store);o.clear();const items=['settings','meta'].includes(store)?[{id:'main',value:S[store]}]:S[store];items.forEach(v=>o.put(v))}t.oncomplete=resolve;t.onerror=()=>reject(t.error)})}
 const ordered=(a,field='date')=>[...a].sort((x,y)=>y[field].localeCompare(x[field]));const find=(a,id)=>a.find(x=>x.id===id);
-const sugarBase=f=>{if(!f)return null;const stored=f.sugar; if(stored!==undefined&&stored!==null&&Number.isFinite(Number(stored)))return Number(stored); const catalog=typeof SUGAR_CATALOG!=='undefined'?(SUGAR_CATALOG.foods?.[f.id]||SUGAR_CATALOG.recipes?.[String(f.id||'').replace(/^recipe-food-/,'')] ):null; return catalog?.sugar==null?null:Number(catalog.sugar)};
+const sugarBase=f=>{if(!f)return null;const stored=f.sugar;if(stored!==undefined&&stored!==null&&Number.isFinite(Number(stored)))return Number(stored);const fallback=catalogSugarFor(f.id);return fallback==null?null:Number(fallback)};
 const foodTotals=(f,amount)=>{const pn=f?.portionNutrition,ratio=pn?.amount>0?amount/pn.amount:amount/100,sugar=sugarBase(f);return {kcal:Math.round((pn?.amount>0?pn.kcal:f?.kcal||0)*ratio*100)/100,protein:Math.round((pn?.amount>0?pn.protein:f?.protein||0)*ratio*100)/100,sugar:sugar===null?null:Math.round((pn?.sugar!=null?pn.sugar: sugar*(pn?.amount>0?pn.amount/100:1))*ratio*100)/100}};
 const mealTotals=m=>(m?.items||[]).reduce((o,i)=>{let f=i.snapshot||find(S.foods,i.foodId);if(f){let v=foodTotals(f,i.amount);o.kcal+=v.kcal;o.protein+=v.protein;if(v.sugar!=null)o.sugar+=v.sugar;else o.sugarIncomplete=true}return o},{kcal:0,protein:0,sugar:0,sugarIncomplete:false});
 const dayMeals=d=>S.meals.filter(x=>x.date===d);const dayDrinks=d=>S.drinks.filter(x=>x.date===d);

@@ -1,8 +1,10 @@
 # Weight App
 
-**Version 0.11.7 · Offlinefähiges Ernährungs-, Gewichts- und Trainingstagebuch (PWA)**
+**Version 0.11.8 · Offlinefähiges Ernährungs-, Gewichts- und Trainingstagebuch (PWA)**
 
 Die Weight App funktioniert ohne Benutzerkonto. Persönliche Daten bleiben standardmäßig im lokalen Browser-Speicher (IndexedDB). Die Webseite kann beispielsweise über GitHub Pages bereitgestellt und auf dem Smartphone zum Startbildschirm hinzugefügt werden.
+
+**Neu in 0.11.8:** Drei Panini-Gerichte, Bereinigung von Standard-Dubletten ohne Änderung historischer Nährwerte, Entfernung der redundanten Vergleichskarte auf „Fortschritt“ und dezente Ausrichtungs-/Farbkorrekturen. Abweichende Eigenwerte werden bei Namenskollisionen ausdrücklich als eigene Variante erhalten.
 
 ## 1. Installation und Update
 
@@ -38,7 +40,6 @@ Beim ersten Start führt ein dreistufiger Assistent durch Gewichtsziel, Kalorien
 
 - Gewicht, Wochenmittel, 7-Tage-Trend und optional geglätteter Verlauf.
 - Optionale Zielprognose anhand verfügbarer Daten; keine Garantie für eine bestimmte Entwicklung.
-- Gemeinsamer Vergleich von Kalorienbilanz und Gewicht über denselben 4-, 8- oder 12-Wochen-Zeitraum mit Hinweisen zur Datenabdeckung.
 - Körpermaße nach individueller Datenverfügbarkeit.
 
 ### Training
@@ -86,6 +87,7 @@ Die lokale IndexedDB heißt `aufbau-db`; sie enthält u. a. Einstellungen, Gewic
 
 | Version | Änderungen |
 |---|---|
+| **0.11.8** | Drei Panini-Gerichte, sichere Dublettenbereinigung, Fortschritts-Vergleichskarte entfernt, einheitlichere Kennzahlenausrichtung und Farbsemantik. |
 | **0.11.7** | Süßkartoffelstampf mit Marshmallows auf 400 g Süßkartoffeln skaliert; übrige Zutaten proportional und Nährwerte angepasst. Bestehende unveränderte Standardrezepte werden aktualisiert. |
 | **0.11.6** | Die vier Thanksgiving-Rezepte auf 1 Portion = gesamtes Rezept umgestellt; 0,5 Portion = halbes Rezept. Bestehende unveränderte Vorlagen werden aktualisiert. |
 | **0.11.5** | Zuckerzusatzkatalog mit Hauptkatalog zusammengeführt; veraltete Referenzen entfernt; README neu geordnet. |
